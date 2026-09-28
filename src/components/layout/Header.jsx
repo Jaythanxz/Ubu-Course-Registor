@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useApp } from '../../context/AppContext';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -13,14 +14,8 @@ import {
   Sun,
   Moon,
   Sparkles,
+  Trash2,
 } from 'lucide-react';
-
-const PRESET_AVATARS = [
-  { id: 'av1', label: 'นักศึกษาชาย', url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=256&q=80' },
-  { id: 'av2', label: 'นักศึกษาหญิง', url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=256&q=80' },
-  { id: 'av3', label: 'สายเทคโนโลยี', url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=256&q=80' },
-  { id: 'av4', label: 'บัณฑิตศึกษา', url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80' },
-];
 
 export default function Header() {
   const { currentUser, updateAvatar, logout, totalCredits, isWorkloadHigh, isDarkMode, toggleTheme } = useApp();
@@ -45,11 +40,6 @@ export default function Header() {
       };
       reader.readAsDataURL(file);
     }
-  };
-
-  const handleSelectPreset = (url) => {
-    updateAvatar(url);
-    setIsUploadModalOpen(false);
   };
 
   return (
@@ -228,92 +218,90 @@ export default function Header() {
       </div>
 
       {/* Upload & Change Avatar Modal */}
-      {isUploadModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-[#111C24] rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-[#D1EAE5] dark:border-slate-800 space-y-5">
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  อัปโหลดรูปโปรไฟล์นักศึกษา
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  เลือกรูปภาพจากเครื่องของคุณ หรือเลือกจากภาพตัวอย่าง
-                </p>
+      {isUploadModalOpen &&
+        createPortal(
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-150">
+            <div className="bg-white dark:bg-[#111C24] rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-[#D1EAE5] dark:border-slate-800 space-y-5 my-auto">
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                    อัปโหลดรูปโปรไฟล์
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    เลือกรูปภาพจากเครื่องของคุณเพื่อเปลี่ยนรูปโปรไฟล์
+                  </p>
+                </div>
+                <button
+                  onClick={() => setIsUploadModalOpen(false)}
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-              <button
-                onClick={() => setIsUploadModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
 
-            {/* Current Avatar Display */}
-            <div className="flex flex-col items-center justify-center space-y-3 py-2">
-              <div className="w-24 h-24 rounded-full ring-4 ring-[#005A56]/20 dark:ring-teal-400/30 overflow-hidden shadow-md bg-[#005A56] flex items-center justify-center text-white text-3xl font-black">
+              {/* Current Avatar Display */}
+              <div className="flex flex-col items-center justify-center space-y-3 py-2">
+                <div className="w-24 h-24 rounded-full ring-4 ring-[#005A56]/20 dark:ring-teal-400/30 overflow-hidden shadow-md bg-[#005A56] flex items-center justify-center text-white text-3xl font-black">
+                  {currentUser.avatar_url ? (
+                    <img
+                      src={currentUser.avatar_url}
+                      alt="Preview"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span>{currentUser.first_name_en?.charAt(0) || currentUser.first_name_th?.charAt(0) || 'U'}</span>
+                  )}
+                </div>
+                <div className="text-xs text-slate-500 dark:text-slate-400 font-medium text-center">
+                  ขนาดที่แนะนำ: รูปสี่เหลี่ยมจัตุรัส ไฟล์ไม่เกิน 2MB
+                </div>
+              </div>
+
+              {/* Upload File Input */}
+              <div className="pt-1">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  className="hidden"
+                />
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-[#005A56] hover:bg-[#004744] text-white text-xs font-bold shadow-md hover:shadow-lg transition-all cursor-pointer"
+                >
+                  <Upload className="w-4 h-4" />
+                  <span>เลือกไฟล์รูปภาพจากเครื่อง (Upload Photo)</span>
+                </button>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
                 {currentUser.avatar_url ? (
-                  <img
-                    src={currentUser.avatar_url}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span>{currentUser.first_name_en?.charAt(0) || 'U'}</span>
-                )}
-              </div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                ขนาดที่แนะนำ: สี่เหลี่ยมจัตุรัส ไม่เกิน 2MB
-              </div>
-            </div>
-
-            {/* Upload File Input */}
-            <div>
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                accept="image/*"
-                className="hidden"
-              />
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-[#005A56] hover:bg-[#004744] text-white text-xs font-bold shadow-md hover:shadow-lg transition-all cursor-pointer"
-              >
-                <Upload className="w-4 h-4" />
-                <span>เลือกไฟล์รูปภาพจากเครื่อง (Upload Photo)</span>
-              </button>
-            </div>
-
-            {/* Preset Avatars Choice */}
-            <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-              <div className="text-xs font-bold text-slate-700 dark:text-slate-300">หรือเลือกจากรูปโปรไฟล์สำเร็จรูป:</div>
-              <div className="grid grid-cols-4 gap-2.5">
-                {PRESET_AVATARS.map((item) => (
                   <button
-                    key={item.id}
-                    onClick={() => handleSelectPreset(item.url)}
-                    className="flex flex-col items-center p-2 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-[#005A56] dark:hover:border-teal-400 hover:bg-teal-50/50 dark:hover:bg-slate-800 transition-all cursor-pointer group"
+                    onClick={() => {
+                      updateAvatar('');
+                      setIsUploadModalOpen(false);
+                    }}
+                    className="flex items-center gap-1.5 text-xs text-red-500 hover:text-red-600 font-semibold cursor-pointer transition-colors"
                   >
-                    <div className="w-12 h-12 rounded-full overflow-hidden mb-1 ring-1 ring-slate-200 dark:ring-slate-700 group-hover:ring-[#005A56]">
-                      <img src={item.url} alt={item.label} className="w-full h-full object-cover" />
-                    </div>
-                    <span className="text-[10px] text-slate-600 dark:text-slate-400 font-medium">{item.label}</span>
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>ลบรูปภาพ</span>
                   </button>
-                ))}
+                ) : (
+                  <div />
+                )}
+                <button
+                  onClick={() => setIsUploadModalOpen(false)}
+                  className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold cursor-pointer transition-colors"
+                >
+                  ยกเลิก
+                </button>
               </div>
             </div>
-
-            <div className="pt-2 text-right">
-              <button
-                onClick={() => setIsUploadModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold cursor-pointer"
-              >
-                ยกเลิก
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </header>
   );
 }

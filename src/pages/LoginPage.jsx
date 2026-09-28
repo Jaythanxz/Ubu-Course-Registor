@@ -21,8 +21,8 @@ import {
 
 export default function LoginPage({ initialMode = 'signin' }) {
   const [mode, setMode] = useState(initialMode); // 'signin' | 'signup'
-  const [username, setUsername] = useState('67114640285');
-  const [password, setPassword] = useState('password123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -393,26 +393,6 @@ export default function LoginPage({ initialMode = 'signin' }) {
                 {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <span>LOG IN</span>}
               </button>
             </div>
-
-            {/* Switch to Sign Up text */}
-            <div className="text-center pt-2 space-y-0.5">
-              <p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                ยังไม่มีบัญชีนักศึกษา?
-              </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setMode('signup');
-                  setErrorMsg('');
-                  setSuccessMsg('');
-                }}
-                className={`text-xs sm:text-sm font-bold underline underline-offset-2 transition-colors cursor-pointer ${
-                  isDarkMode ? 'text-teal-300 hover:text-white' : 'text-slate-900 hover:text-[#005B58]'
-                }`}
-              >
-                สมัครบัญชีใหม่ (Sign Up)
-              </button>
-            </div>
           </form>
         ) : (
           /* ================= MODE: SIGN UP ================= */
@@ -541,26 +521,6 @@ export default function LoginPage({ initialMode = 'signin' }) {
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}
-              </button>
-            </div>
-
-            {/* Back to Sign In */}
-            <div className="text-center pt-2">
-              <span className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                มีบัญชีนักศึกษาอยู่แล้ว?{' '}
-              </span>
-              <button
-                type="button"
-                onClick={() => {
-                  setMode('signin');
-                  setErrorMsg('');
-                  setSuccessMsg('');
-                }}
-                className={`text-xs sm:text-sm font-bold underline underline-offset-2 transition-colors cursor-pointer ${
-                  isDarkMode ? 'text-teal-300 hover:text-white' : 'text-slate-900 hover:text-[#005B58]'
-                }`}
-              >
-                เข้าสู่ระบบ (Sign In)
               </button>
             </div>
           </form>

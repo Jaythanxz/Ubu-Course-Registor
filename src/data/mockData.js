@@ -173,6 +173,46 @@ export const COURSE_PREREQUISITES = [
 export const STUDENT_PASSED_COURSES = ['1146101', '0041001']; // has passed Fund Prog and English
 
 export const COURSE_SECTIONS = [
+  // 1146101 - Fundamentals of Computer Programming (Tue 13:00 - 16:00 & Thu 13:00 - 16:00)
+  {
+    section_id: 1011,
+    course_id: '1146101',
+    section_no: '01',
+    day_of_week: 'Tue',
+    start_time: '13:00',
+    end_time: '16:00',
+    room: 'SC-402 (Lab CS)',
+    lecturer: 'ผศ.ดร.ชิตพงษ์ กิตติพาณิชย์',
+    max_seats: 45,
+    enrolled_seats: 38,
+  },
+  {
+    section_id: 1012,
+    course_id: '1146101',
+    section_no: '02',
+    day_of_week: 'Thu',
+    start_time: '13:00',
+    end_time: '16:00',
+    room: 'SC-403 (Lab CS)',
+    lecturer: 'อ.วิภาดา ลิขิตพงศ์',
+    max_seats: 45,
+    enrolled_seats: 26,
+  },
+
+  // 0041001 - English for IT Professional Communication (Fri 09:00 - 12:00)
+  {
+    section_id: 1001,
+    course_id: '0041001',
+    section_no: '01',
+    day_of_week: 'Fri',
+    start_time: '09:00',
+    end_time: '12:00',
+    room: 'LA-201 (Language Lab)',
+    lecturer: 'Ajarn David Miller',
+    max_seats: 50,
+    enrolled_seats: 34,
+  },
+
   // 1146201 - Data Structures (Mon 09:00 - 12:00)
   {
     section_id: 101,

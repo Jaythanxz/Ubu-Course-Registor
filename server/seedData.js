@@ -31,6 +31,26 @@ export const SEED_CAREER_TRACKS = [
 
 export const SEED_COURSES = [
   {
+    course_id: '1146101',
+    course_name_th: 'การเขียนโปรแกรมคอมพิวเตอร์พื้นฐาน',
+    course_name_en: 'Fundamentals of Computer Programming',
+    credits: 3,
+    workload_score: 3,
+    career_track_id: 1,
+    category: 'Core (วิชาแกนบังคับ)',
+    description: 'หลักการออกแบบและพัฒนาอัลกอริทึม การเขียนโปรแกรมโครงสร้าง การจัดการหน่วยความจำ และการแก้โจทย์ปัญหาเชิงคำนวณ'
+  },
+  {
+    course_id: '0041001',
+    course_name_th: 'ภาษาอังกฤษเพื่อการสื่อสารในงานไอที',
+    course_name_en: 'English for IT Professional Communication',
+    credits: 3,
+    workload_score: 2,
+    career_track_id: null,
+    category: 'GenEd (ศึกษาทั่วไป)',
+    description: 'ทักษะการนำเสนองาน การเขียนเรซูเม่ การเขียนเอกสารทางเทคนิค และการสนทนาภาษาอังกฤษ'
+  },
+  {
     course_id: '1146201',
     course_name_th: 'โครงสร้างข้อมูลและขั้นตอนวิธี',
     course_name_en: 'Data Structures and Algorithms',
@@ -113,6 +133,9 @@ export const SEED_COURSES = [
 ];
 
 export const SEED_SECTIONS = [
+  { section_id: 1011, course_id: '1146101', section_no: '01', day_of_week: 'Tue', start_time: '13:00', end_time: '16:00', room: 'SC-402', lecturer: 'ผศ.ดร.ชิตพงษ์ กิตติพาณิชย์', max_seats: 45, enrolled_seats: 38 },
+  { section_id: 1012, course_id: '1146101', section_no: '02', day_of_week: 'Thu', start_time: '13:00', end_time: '16:00', room: 'SC-403', lecturer: 'อ.วิภาดา ลิขิตพงศ์', max_seats: 45, enrolled_seats: 26 },
+  { section_id: 1001, course_id: '0041001', section_no: '01', day_of_week: 'Fri', start_time: '09:00', end_time: '12:00', room: 'LA-201', lecturer: 'Ajarn David Miller', max_seats: 50, enrolled_seats: 34 },
   { section_id: 101, course_id: '1146201', section_no: '01', day_of_week: 'Mon', start_time: '09:00', end_time: '12:00', room: 'SC-304', lecturer: 'ผศ.ดร.ชิตพงษ์ กิตติพาณิชย์', max_seats: 40, enrolled_seats: 38 },
   { section_id: 102, course_id: '1146201', section_no: '02', day_of_week: 'Wed', start_time: '13:00', end_time: '16:00', room: 'SC-304', lecturer: 'ผศ.ดร.ชิตพงษ์ กิตติพาณิชย์', max_seats: 40, enrolled_seats: 25 },
   { section_id: 201, course_id: '1146311', section_no: '01', day_of_week: 'Tue', start_time: '09:00', end_time: '12:00', room: 'LAB-IT2', lecturer: 'ดร.กิตติศักดิ์ ศรีมงคล', max_seats: 35, enrolled_seats: 34 },

@@ -70,6 +70,16 @@
   ],
   "courses": [
     {
+      "course_id": "1146101",
+      "course_name_th": "การเขียนโปรแกรมคอมพิวเตอร์พื้นฐาน",
+      "course_name_en": "Fundamentals of Computer Programming",
+      "credits": 3,
+      "workload_score": 3,
+      "career_track_id": 1,
+      "category": "วิชาบังคับ (Core)",
+      "description": "หลักการออกแบบและพัฒนาอัลกอริทึม การเขียนโปรแกรมโครงสร้าง การจัดการหน่วยความจำ และการแก้โจทย์ปัญหาเชิงคำนวณ"
+    },
+    {
       "course_id": "1146201",
       "course_name_th": "โครงสร้างข้อมูลและขั้นตอนวิธี",
       "course_name_en": "Data Structures and Algorithms",
@@ -148,9 +158,43 @@
       "career_track_id": 1,
       "category": "Core (วิชาแกนบังคับ)",
       "description": "แนวคิดคลาส อ็อบเจกต์ โพลีมอร์ฟิซึม การสืบทอดคุณสมบัติ และการห่อหุ้ม"
+    },
+    {
+      "course_id": "0041001",
+      "course_name_th": "ภาษาอังกฤษเพื่อการสื่อสารในงานไอที",
+      "course_name_en": "English for IT Professional Communication",
+      "credits": 3,
+      "workload_score": 2,
+      "career_track_id": null,
+      "category": "วิชาศึกษาทั่วไป (GenEd)",
+      "description": "ทักษะการนำเสนองาน การเขียนเรซูเม่ การเขียนเอกสารทางเทคนิค และการสนทนาภาษาอังกฤษในสายงานเทคโนโลยี"
     }
   ],
   "course_sections": [
+    {
+      "section_id": 1011,
+      "course_id": "1146101",
+      "section_no": "01",
+      "day_of_week": "Tue",
+      "start_time": "13:00",
+      "end_time": "16:00",
+      "room": "SC-402 (Lab CS)",
+      "lecturer": "ผศ.ดร.ชิตพงษ์ กิตติพาณิชย์",
+      "max_seats": 45,
+      "enrolled_seats": 38
+    },
+    {
+      "section_id": 1012,
+      "course_id": "1146101",
+      "section_no": "02",
+      "day_of_week": "Thu",
+      "start_time": "13:00",
+      "end_time": "16:00",
+      "room": "SC-403 (Lab CS)",
+      "lecturer": "อ.วิภาดา ลิขิตพงศ์",
+      "max_seats": 45,
+      "enrolled_seats": 26
+    },
     {
       "section_id": 101,
       "course_id": "1146201",
@@ -246,6 +290,18 @@
       "lecturer": "อ.อรทัย วิจิตรศิลป์",
       "max_seats": 40,
       "enrolled_seats": 35
+    },
+    {
+      "section_id": 1001,
+      "course_id": "0041001",
+      "section_no": "01",
+      "day_of_week": "Fri",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "room": "LA-201 (Language Lab)",
+      "lecturer": "Ajarn David Miller",
+      "max_seats": 50,
+      "enrolled_seats": 34
     }
   ],
   "course_prerequisites": [

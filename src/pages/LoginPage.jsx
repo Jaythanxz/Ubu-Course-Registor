@@ -37,8 +37,14 @@ export default function LoginPage({ initialMode = 'signin' }) {
   const [successMsg, setSuccessMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { login, register, isDarkMode, toggleTheme } = useApp();
+  const { login, register, isDarkMode, toggleTheme, isAuthenticated } = useApp();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     setMode(initialMode);

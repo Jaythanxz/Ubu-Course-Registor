@@ -154,31 +154,79 @@ export function AppProvider({ children }) {
     }
   }, [loadUserData]);
 
+  // Client-side persistent user registry (preserves logins even if cloud container sleep/redeploys)
+  const saveUserToLocalRegistry = (userData, safeUser) => {
+    try {
+      const registered = JSON.parse(localStorage.getItem('ubu_registered_users') || '[]');
+      const cleanId = String(userData.student_id).trim();
+      const existingIdx = registered.findIndex(u => String(u.student_id).trim() === cleanId);
+      const userEntry = {
+        student_id: cleanId,
+        password: userData.password,
+        user: safeUser
+      };
+      if (existingIdx !== -1) {
+        registered[existingIdx] = userEntry;
+      } else {
+        registered.push(userEntry);
+      }
+      localStorage.setItem('ubu_registered_users', JSON.stringify(registered));
+    } catch (e) {
+      console.warn('Could not save user to local registry:', e);
+    }
+  };
+
   // LOGIN
   const login = async (studentId, password) => {
+    const cleanId = String(studentId).trim();
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: studentId, password })
+        body: JSON.stringify({ username: cleanId, password })
       });
       const data = await res.json();
       if (data.success && data.user) {
         if (data.token) localStorage.setItem('ubu_token', data.token);
+        saveUserToLocalRegistry({ student_id: cleanId, password }, data.user);
         setCurrentUser(data.user);
         setIsAuthenticated(true);
         // Load user-specific database records
         await loadUserData(data.token, data.user.student_id);
         return { success: true, message: data.message };
       }
+
+      // Check local registry fallback (if container restarted on cloud free tier)
+      const localUsers = JSON.parse(localStorage.getItem('ubu_registered_users') || '[]');
+      const match = localUsers.find(u => String(u.student_id).trim() === cleanId && u.password === password);
+      if (match) {
+        setCurrentUser(match.user);
+        setIsAuthenticated(true);
+        // Resync user to backend in background
+        fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...match.user, password })
+        }).catch(() => {});
+        return { success: true, message: 'เข้าสู่ระบบสำเร็จ' };
+      }
+
       return { success: false, message: data.message || 'เข้าสู่ระบบไม่สำเร็จ' };
     } catch (err) {
       // Offline fallback
+      const localUsers = JSON.parse(localStorage.getItem('ubu_registered_users') || '[]');
+      const match = localUsers.find(u => String(u.student_id).trim() === cleanId && u.password === password);
+      if (match) {
+        setCurrentUser(match.user);
+        setIsAuthenticated(true);
+        return { success: true, message: 'เข้าสู่ระบบสำเร็จ' };
+      }
+
       setIsAuthenticated(true);
       if (studentId) {
         setCurrentUser(prev => ({
           ...prev,
-          student_id: studentId,
+          student_id: cleanId,
         }));
       }
       return { success: true, message: 'เข้าสู่ระบบสำเร็จ' };
@@ -187,6 +235,7 @@ export function AppProvider({ children }) {
 
   // REGISTER (Supports minimal Student ID & Password, other fields set to friendly defaults)
   const register = async (userData) => {
+    const cleanId = String(userData.student_id).trim();
     try {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
@@ -196,6 +245,7 @@ export function AppProvider({ children }) {
       const data = await res.json();
       if (data.success && data.user) {
         if (data.token) localStorage.setItem('ubu_token', data.token);
+        saveUserToLocalRegistry(userData, data.user);
         setCurrentUser(data.user);
         setIsAuthenticated(true);
         // Reset state for newly registered user
@@ -212,7 +262,6 @@ export function AppProvider({ children }) {
       return { success: false, message: data.message || 'สมัครสมาชิกไม่สำเร็จ' };
     } catch (err) {
       // Local fallback
-      const cleanId = userData.student_id.trim();
       const newUser = {
         ...INITIAL_USER,
         ...userData,
@@ -226,6 +275,7 @@ export function AppProvider({ children }) {
         department: userData.department || 'สาขาวิทยาการคอมพิวเตอร์และนวัตกรรมดิจิทัล',
         advisor_name: userData.advisor_name || 'ยังไม่ระบุอาจารย์ที่ปรึกษา',
       };
+      saveUserToLocalRegistry(userData, newUser);
       setCurrentUser(newUser);
       setIsAuthenticated(true);
       setEnrolledSectionIds([]);
@@ -457,7 +507,7 @@ export function AppProvider({ children }) {
           return {
             clash: true,
             conflictingSection: sec,
-            reason: `เวลาเรียนตรงกับวิชา ${sec.course.course_name_th} (${sec.day_of_week} ${sec.start_time} - ${sec.end_time})`,
+            reason: `เวลาเรียนตรงกับวิชา ${sec.course?.course_name_th || sec.course_id} (${sec.day_of_week} ${sec.start_time} - ${sec.end_time})`,
           };
         }
       }

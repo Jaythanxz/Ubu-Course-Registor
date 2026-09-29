@@ -91,9 +91,32 @@ app.post('/api/auth/register', async (req, res) => {
     // Check existing student_id
     const existingById = await getUserByStudentId(cleanStudentId);
     if (existingById) {
+      // If user already registered and password matches, seamlessly log them in!
+      let isMatch = false;
+      if (existingById.password_hash) {
+        isMatch = await bcrypt.compare(password, existingById.password_hash);
+      }
+      if (!isMatch && existingById.password && existingById.password === password) {
+        isMatch = true;
+      }
+      if (isMatch) {
+        const token = jwt.sign(
+          { student_id: existingById.student_id, email: existingById.email },
+          JWT_SECRET,
+          { expiresIn: '365d' }
+        );
+        const { password_hash, ...safeUser } = existingById;
+        return res.status(200).json({
+          success: true,
+          message: `เข้าสู่ระบบสำเร็จ ยินดีต้อนรับกลับมา!`,
+          token,
+          user: safeUser
+        });
+      }
+
       return res.status(409).json({
         success: false,
-        message: `รหัสนักศึกษา ${cleanStudentId} มีในระบบแล้ว กรุณาเข้าสู่ระบบหรือใช้รหัสอื่น`
+        message: `รหัสนักศึกษา ${cleanStudentId} มีในระบบแล้ว กรุณาเข้าสู่ระบบด้วยรหัสผ่านของคุณ`
       });
     }
 
@@ -130,11 +153,11 @@ app.post('/api/auth/register', async (req, res) => {
       avatar_url: ''
     });
 
-    // Generate JWT
+    // Generate JWT (Valid for 1 year)
     const token = jwt.sign(
       { student_id: newUser.student_id, email: newUser.email },
       JWT_SECRET,
-      { expiresIn: '7d' }
+      { expiresIn: '365d' }
     );
 
     // Strip password hash from response
@@ -186,7 +209,7 @@ app.post('/api/auth/login', async (req, res) => {
     const token = jwt.sign(
       { student_id: user.student_id, email: user.email },
       JWT_SECRET,
-      { expiresIn: '7d' }
+      { expiresIn: '365d' }
     );
 
     const { password_hash, ...safeUser } = user;
@@ -200,6 +223,44 @@ app.post('/api/auth/login', async (req, res) => {
   } catch (err) {
     console.error('Login error:', err);
     res.status(500).json({ success: false, message: 'เกิดข้อผิดพลาดในเซิร์ฟเวอร์' });
+  }
+});
+
+// 2.5 SYNC USERS (กู้คืนและบันทึกผู้ใช้จาก Client Storage สู่เซิร์ฟเวอร์อัตโนมัติ)
+app.post('/api/auth/sync-users', async (req, res) => {
+  try {
+    const { users } = req.body;
+    if (!Array.isArray(users)) {
+      return res.status(400).json({ success: false, message: 'Invalid payload' });
+    }
+
+    let syncedCount = 0;
+    for (const item of users) {
+      if (!item || !item.student_id) continue;
+      const cleanId = String(item.student_id).trim();
+      const existing = await getUserByStudentId(cleanId);
+      if (!existing && item.password) {
+        await createUser({
+          ...(item.user || {}),
+          student_id: cleanId,
+          password: item.password,
+          email: item.user?.email || `${cleanId}@ubu.ac.th`,
+          first_name_th: item.user?.first_name_th || 'นักศึกษา',
+          last_name_th: item.user?.last_name_th || cleanId,
+          first_name_en: item.user?.first_name_en || 'Student',
+          last_name_en: item.user?.last_name_en || cleanId,
+          faculty: item.user?.faculty || 'คณะวิทยาศาสตร์ (Faculty of Science)',
+          department: item.user?.department || 'สาขาวิทยาการคอมพิวเตอร์และนวัตกรรมดิจิทัล',
+          advisor_name: item.user?.advisor_name || 'ยังไม่ระบุอาจารย์ที่ปรึกษา',
+        });
+        syncedCount++;
+      }
+    }
+
+    res.json({ success: true, message: `Synced ${syncedCount} users`, syncedCount });
+  } catch (err) {
+    console.error('Sync users error:', err);
+    res.status(500).json({ success: false, message: 'Error syncing users' });
   }
 });
 

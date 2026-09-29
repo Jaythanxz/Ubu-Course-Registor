@@ -21,10 +21,28 @@ import {
 
 export default function LoginPage({ initialMode = 'signin' }) {
   const [mode, setMode] = useState(initialMode); // 'signin' | 'signup'
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  
+  // Auto-fill remembered credentials if available
+  const [username, setUsername] = useState(() => {
+    return localStorage.getItem('ubu_remembered_student_id') || '';
+  });
+  const [password, setPassword] = useState(() => {
+    return localStorage.getItem('ubu_remembered_password') || '';
+  });
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(() => {
+    return localStorage.getItem('ubu_remember_me') !== 'false';
+  });
+
+  // Local accounts previously registered or logged in on this browser
+  const [savedAccounts, setSavedAccounts] = useState(() => {
+    try {
+      const list = JSON.parse(localStorage.getItem('ubu_registered_users') || '[]');
+      return Array.isArray(list) ? list : [];
+    } catch {
+      return [];
+    }
+  });
 
   // Sign up form state (Only Student ID & Password required)
   const [signUpData, setSignUpData] = useState({
@@ -60,6 +78,33 @@ export default function LoginPage({ initialMode = 'signin' }) {
     setIsLoading(false);
 
     if (res.success) {
+      if (rememberMe) {
+        localStorage.setItem('ubu_remember_me', 'true');
+        localStorage.setItem('ubu_remembered_student_id', username.trim());
+        localStorage.setItem('ubu_remembered_password', password);
+      } else {
+        localStorage.setItem('ubu_remember_me', 'false');
+        localStorage.removeItem('ubu_remembered_student_id');
+        localStorage.removeItem('ubu_remembered_password');
+      }
+      navigate('/');
+    } else {
+      setErrorMsg(res.message);
+    }
+  };
+
+  const handleSelectSavedAccount = async (acc) => {
+    setUsername(acc.student_id);
+    setPassword(acc.password || '');
+    setErrorMsg('');
+    setSuccessMsg('กำลังเข้าสู่ระบบ...');
+    setIsLoading(true);
+    const res = await login(acc.student_id, acc.password || '');
+    setIsLoading(false);
+    if (res.success) {
+      localStorage.setItem('ubu_remember_me', 'true');
+      localStorage.setItem('ubu_remembered_student_id', acc.student_id);
+      if (acc.password) localStorage.setItem('ubu_remembered_password', acc.password);
       navigate('/');
     } else {
       setErrorMsg(res.message);
@@ -94,6 +139,9 @@ export default function LoginPage({ initialMode = 'signin' }) {
     setIsLoading(false);
 
     if (res.success) {
+      localStorage.setItem('ubu_remember_me', 'true');
+      localStorage.setItem('ubu_remembered_student_id', signUpData.student_id.trim());
+      localStorage.setItem('ubu_remembered_password', signUpData.password);
       setSuccessMsg('สมัครสมาชิกสำเร็จเรียบร้อย! กำลังนำคุณเข้าสู่ระบบ...');
       try {
         confetti({
@@ -106,7 +154,7 @@ export default function LoginPage({ initialMode = 'signin' }) {
 
       setTimeout(() => {
         navigate('/');
-      }, 1500);
+      }, 800);
     } else {
       setErrorMsg(res.message);
     }
@@ -270,9 +318,46 @@ export default function LoginPage({ initialMode = 'signin' }) {
 
         {/* ================= MODE: SIGN IN ================= */}
         {mode === 'signin' ? (
-          <form onSubmit={handleLogin} className="w-full space-y-4">
-            {/* Username Input Pill */}
-            <div className="relative flex items-center">
+          <div className="w-full space-y-4">
+            {/* Quick Login for Saved Registered Accounts */}
+            {savedAccounts.length > 0 && (
+              <div className="w-full p-3.5 rounded-2xl bg-teal-50/80 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800/60 space-y-2">
+                <div className="text-xs font-bold text-[#005A56] dark:text-teal-300 flex items-center justify-between">
+                  <span>📌 บัญชีที่คุณเคยสมัครไว้ (เข้าใช้งานได้ทันที):</span>
+                </div>
+                <div className="space-y-1.5 max-h-36 overflow-y-auto">
+                  {savedAccounts.map((acc) => (
+                    <button
+                      key={acc.student_id}
+                      type="button"
+                      onClick={() => handleSelectSavedAccount(acc)}
+                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 hover:border-[#005A56] dark:hover:border-teal-400 hover:bg-[#E6F4F1] dark:hover:bg-slate-700/80 transition-all text-left cursor-pointer group"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-full bg-[#005A56] text-white flex items-center justify-center font-bold text-xs shrink-0">
+                          {acc.user?.first_name_en?.charAt(0) || 'U'}
+                        </div>
+                        <div className="truncate">
+                          <div className="text-xs font-bold text-slate-800 dark:text-slate-100 font-mono">
+                            {acc.student_id}
+                          </div>
+                          <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate">
+                            {acc.user?.first_name_th ? `${acc.user.first_name_th} ${acc.user.last_name_th}` : 'นักศึกษา'}
+                          </div>
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-[#005A56] dark:text-teal-400 group-hover:translate-x-0.5 transition-transform shrink-0 ml-2">
+                        เข้าใช้งาน →
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} className="w-full space-y-4">
+              {/* Username Input Pill */}
+              <div className="relative flex items-center">
               <div
                 className={`absolute left-5 pointer-events-none transition-colors ${
                   isDarkMode ? 'text-[#009688]' : 'text-[#006663]'
@@ -400,7 +485,8 @@ export default function LoginPage({ initialMode = 'signin' }) {
               </button>
             </div>
           </form>
-        ) : (
+        </div>
+      ) : (
           /* ================= MODE: SIGN UP ================= */
           <form onSubmit={handleSignUp} className="w-full space-y-4 text-xs sm:text-sm">
             {/* Student ID */}

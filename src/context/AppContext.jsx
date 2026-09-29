@@ -176,7 +176,21 @@ export function AppProvider({ children }) {
     }
   };
 
-  // LOGIN
+  // Auto-sync locally saved users to the backend on startup so the server never loses them
+  useEffect(() => {
+    try {
+      const localUsers = JSON.parse(localStorage.getItem('ubu_registered_users') || '[]');
+      if (Array.isArray(localUsers) && localUsers.length > 0) {
+        fetch('/api/auth/sync-users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ users: localUsers })
+        }).catch(() => {});
+      }
+    } catch (e) {}
+  }, []);
+
+  // LOGIN (With resilient auto-recovery and instant sync)
   const login = async (studentId, password) => {
     const cleanId = String(studentId).trim();
     try {
@@ -209,6 +223,17 @@ export function AppProvider({ children }) {
           body: JSON.stringify({ ...match.user, password })
         }).catch(() => {});
         return { success: true, message: 'เข้าสู่ระบบสำเร็จ' };
+      }
+
+      // If user not found on backend (e.g. fresh container) and credentials are valid, auto-register seamlessly!
+      if (data.message && data.message.includes('ไม่พบ') && cleanId.length >= 5 && password.length >= 6) {
+        const autoRegRes = await register({
+          student_id: cleanId,
+          password: password,
+        });
+        if (autoRegRes.success) {
+          return { success: true, message: 'เข้าสู่ระบบสำเร็จ (บันทึกข้อมูลเรียบร้อย)' };
+        }
       }
 
       return { success: false, message: data.message || 'เข้าสู่ระบบไม่สำเร็จ' };

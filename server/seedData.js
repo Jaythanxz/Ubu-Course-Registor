@@ -167,6 +167,51 @@ export const SEED_USERS = [
     gpa: 3.64,
     credits_completed: 45,
     career_track_id: 1
+  },
+  {
+    student_id: '67122420128',
+    first_name_th: 'นักศึกษา',
+    last_name_th: '67122420128',
+    first_name_en: 'Student',
+    last_name_en: '67122420128',
+    email: '67122420128@ubu.ac.th',
+    password: 'password123',
+    faculty: 'คณะวิทยาศาสตร์ (Faculty of Science)',
+    department: 'สาขาวิทยาการคอมพิวเตอร์และนวัตกรรมดิจิทัล',
+    advisor_name: 'ยังไม่ระบุอาจารย์ที่ปรึกษา',
+    gpa: 3.5,
+    credits_completed: 0,
+    career_track_id: 1
+  },
+  {
+    student_id: '67114640999',
+    first_name_th: 'กิตติศักดิ์',
+    last_name_th: 'ใจดี',
+    first_name_en: 'Kittisak',
+    last_name_en: 'Jaidee',
+    email: 'kittisak.j.67@ubu.ac.th',
+    password: 'password123',
+    faculty: 'คณะวิทยาศาสตร์',
+    department: 'สาขาวิทยาการคอมพิวเตอร์',
+    advisor_name: 'ผศ.ดร.ชิตพงษ์ กิตติพาณิชย์',
+    gpa: 3.5,
+    credits_completed: 0,
+    career_track_id: 1
+  },
+  {
+    student_id: '67114640888',
+    first_name_th: 'สมคิด',
+    last_name_th: 'เรียนดี',
+    first_name_en: 'Somkid',
+    last_name_en: 'Reandee',
+    email: '67114640888@ubu.ac.th',
+    password: 'password123',
+    faculty: 'คณะวิศวกรรมศาสตร์ (Faculty of Engineering)',
+    department: 'วิศวกรรมคอมพิวเตอร์',
+    advisor_name: 'รศ.ดร.อาจารย์ ที่ปรึกษา',
+    gpa: 3.5,
+    credits_completed: 0,
+    career_track_id: 1
   }
 ];
 

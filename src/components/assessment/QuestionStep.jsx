@@ -52,7 +52,7 @@ export default function QuestionStep({
               className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-start gap-3.5 ${
                 isSelected
                   ? 'border-[#0A5C5A] bg-[#E6F4F1]/60 dark:bg-teal-950/40 dark:border-teal-500 shadow-xs ring-1 ring-[#0A5C5A]/30 dark:ring-teal-500/20'
-                  : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-white dark:bg-[#0c1d22] hover:bg-slate-50/70 dark:hover:bg-[#11272e]'
+                  : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50/70 dark:hover:bg-slate-700/60'
               }`}
             >
               {/* Radio or Checkbox circle */}

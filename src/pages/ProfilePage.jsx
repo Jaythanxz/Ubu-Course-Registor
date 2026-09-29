@@ -104,7 +104,7 @@ export default function ProfilePage() {
       )}
 
       {/* Profile Card Header */}
-      <div className="bg-white dark:bg-[#111C24] rounded-3xl p-6 sm:p-8 border border-[#D1EAE5] dark:border-slate-800 shadow-xs flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 relative">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-[#D1EAE5] dark:border-slate-700 shadow-xs flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 relative">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
           <div className="relative group shrink-0">
             <input
@@ -201,7 +201,7 @@ export default function ProfilePage() {
       {/* Edit Profile Modal */}
       {isEditing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-[#111C24] rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-[#D1EAE5] dark:border-slate-800 space-y-5 max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-[#D1EAE5] dark:border-slate-700 space-y-5 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
                 <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">
@@ -401,7 +401,7 @@ export default function ProfilePage() {
       )}
 
       {/* Contact & Address Card */}
-      <div className="bg-white dark:bg-[#111C24] rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-800 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-700 shadow-xs space-y-4">
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
           <Phone className="w-5 h-5 text-[#006663] dark:text-teal-400" />
           <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">ข้อมูลการติดต่อและที่อยู่</h3>
@@ -439,7 +439,7 @@ export default function ProfilePage() {
       {/* 2-Column Info Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Academic Details */}
-        <div className="bg-white dark:bg-[#111C24] rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-800 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-700 shadow-xs space-y-4">
           <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
             <Award className="w-5 h-5 text-amber-500" />
             <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">ข้อมูลด้านการศึกษา</h3>
@@ -469,7 +469,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Advisor Details */}
-        <div className="bg-white dark:bg-[#111C24] rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-800 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-700 shadow-xs space-y-4">
           <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
             <User className="w-5 h-5 text-[#006663] dark:text-teal-400" />
             <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">อาจารย์ที่ปรึกษา (Advisor)</h3>
@@ -496,7 +496,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Passed Courses Transcript History (Prerequisite basis) */}
-      <div className="bg-white dark:bg-[#111C24] rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-800 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-700 shadow-xs space-y-4">
         <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-[#006663] dark:text-teal-400" />

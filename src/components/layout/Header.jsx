@@ -44,7 +44,7 @@ export default function Header({ onToggleMobileMenu = () => {} }) {
   };
 
   return (
-    <header className="bg-white/95 dark:bg-[#0C151D]/95 border-b border-[#D1EAE5]/80 dark:border-slate-800/80 px-3.5 sm:px-8 py-2.5 sm:py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-2xs backdrop-blur-md transition-colors">
+    <header className="bg-white/95 dark:bg-slate-900/95 border-b border-[#D1EAE5]/80 dark:border-slate-800/80 px-3.5 sm:px-8 py-2.5 sm:py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-2xs backdrop-blur-md transition-colors">
       {/* Left side: Hamburger button (mobile) & Context Badges */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Mobile Hamburger Menu Toggle Button */}
@@ -136,7 +136,7 @@ export default function Header({ onToggleMobileMenu = () => {} }) {
 
           {/* Professional Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-72 max-w-[calc(100vw-1.5rem)] bg-white dark:bg-[#111C24] rounded-3xl shadow-2xl border border-[#D1EAE5] dark:border-slate-800 p-4 space-y-4 animate-in fade-in zoom-in-95 duration-150 z-50">
+            <div className="absolute right-0 mt-2 w-72 max-w-[calc(100vw-1.5rem)] bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-[#D1EAE5] dark:border-slate-700 p-4 space-y-4 animate-in fade-in zoom-in-95 duration-150 z-50">
               {/* Header info in dropdown */}
               <div className="flex items-center gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div className="relative">
@@ -236,7 +236,7 @@ export default function Header({ onToggleMobileMenu = () => {} }) {
       {isUploadModalOpen &&
         createPortal(
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-150">
-            <div className="bg-white dark:bg-[#111C24] rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-[#D1EAE5] dark:border-slate-800 space-y-5 my-auto">
+            <div className="bg-white dark:bg-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-[#D1EAE5] dark:border-slate-700 space-y-5 my-auto">
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
                 <div>
                   <h3 className="text-base font-bold text-slate-900 dark:text-white">

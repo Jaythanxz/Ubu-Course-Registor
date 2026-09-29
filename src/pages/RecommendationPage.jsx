@@ -151,7 +151,7 @@ export default function RecommendationPage() {
       )}
 
       {/* Top Banner: Minimalist, Crisp, Professional */}
-      <div className="bg-white dark:bg-[#111C24] rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-800 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-700 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold text-[#006663] dark:text-teal-400 uppercase tracking-wider mb-1">
             <Compass className="w-4 h-4 text-[#F07C00]" />
@@ -203,7 +203,7 @@ export default function RecommendationPage() {
               className={`flex items-center gap-2.5 px-5 py-3 rounded-2xl font-semibold text-xs transition-all shrink-0 cursor-pointer ${
                 isSelected
                   ? 'bg-[#005A56] dark:bg-teal-700 text-white shadow-md'
-                  : 'bg-white dark:bg-[#111C24] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800'
+                  : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
               }`}
             >
               {getTrackIcon(track.icon_name)}
@@ -223,7 +223,7 @@ export default function RecommendationPage() {
       {/* Main Master-Detail Layout: Left Course Directory | Right Subject Detail */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* LEFT COLUMN: Course Directory (4 cols) */}
-        <div className="lg:col-span-4 bg-white dark:bg-[#111C24] rounded-3xl p-4 border border-[#D1EAE5] dark:border-slate-800 shadow-xs space-y-2">
+        <div className="lg:col-span-4 bg-white dark:bg-slate-800 rounded-3xl p-4 border border-[#D1EAE5] dark:border-slate-700 shadow-xs space-y-2">
           <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
             <span className="text-xs font-bold text-slate-700 dark:text-slate-300">รายวิชาในสาย ({trackCourses.length})</span>
             <span className="text-[11px] text-slate-400 dark:text-slate-500">คลิกเพื่อดูรายละเอียด</span>
@@ -242,7 +242,7 @@ export default function RecommendationPage() {
                   className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
                     isSelected
                       ? 'border-[#005A56] dark:border-teal-500 bg-[#E6F4F1]/70 dark:bg-teal-950/60 shadow-xs ring-1 ring-[#005A56]/30 dark:ring-teal-500/30'
-                      : 'border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50/70 dark:hover:bg-slate-800/70 bg-white dark:bg-[#0C151D]'
+                      : 'border-slate-200/80 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50/70 dark:hover:bg-slate-700/60 bg-white dark:bg-slate-900/60'
                   }`}
                 >
                   <div className="space-y-1 truncate">
@@ -281,7 +281,7 @@ export default function RecommendationPage() {
         </div>
 
         {/* RIGHT COLUMN: Subject Detail Pane with Tabs (8 cols) */}
-        <div className="lg:col-span-8 bg-white dark:bg-[#111C24] rounded-3xl p-6 sm:p-8 border border-[#D1EAE5] dark:border-slate-800 shadow-xs space-y-6">
+        <div className="lg:col-span-8 bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-[#D1EAE5] dark:border-slate-700 shadow-xs space-y-6">
           {/* Subject Detail Header */}
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
             <div className="space-y-1.5">
@@ -551,7 +551,7 @@ export default function RecommendationPage() {
                           <span>{rev.rating}.0</span>
                         </div>
                       </div>
-                      <p className="text-slate-700 dark:text-slate-300 text-xs leading-relaxed italic bg-white dark:bg-[#111C24] p-3 rounded-xl border border-slate-100 dark:border-slate-700/60">
+                      <p className="text-slate-700 dark:text-slate-300 text-xs leading-relaxed italic bg-white dark:bg-slate-900/60 p-3 rounded-xl border border-slate-100 dark:border-slate-700/60">
                         "{rev.comment_text}"
                       </p>
                       <div className="flex items-center gap-2 pt-1">

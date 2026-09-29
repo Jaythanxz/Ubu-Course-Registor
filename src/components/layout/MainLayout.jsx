@@ -62,7 +62,7 @@ export default function MainLayout() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#F8FAFC] dark:bg-[#080F15] text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="flex min-h-screen bg-[#F8FAFC] dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors">
       {/* Sidebar with responsive mobile drawer support */}
       <Sidebar
         isMobileOpen={isMobileMenuOpen}
@@ -86,7 +86,7 @@ export default function MainLayout() {
       {/* Mobile Bottom Navigation Dock (Thumb-friendly on Smartphones) */}
       <nav
         aria-label="เมนูหลักบนมือถือ"
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#0C151D]/95 border-t border-[#D1EAE5]/80 dark:border-slate-800/80 backdrop-blur-md px-2 py-1.5 flex items-center justify-around shadow-2xl safe-area-inset-bottom"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 border-t border-[#D1EAE5]/80 dark:border-slate-800/80 backdrop-blur-md px-2 py-1.5 flex items-center justify-around shadow-2xl safe-area-inset-bottom"
       >
         {bottomNavItems.map((item) => {
           const Icon = item.icon;

@@ -38,7 +38,7 @@ export default function WorkloadMeter() {
   const severity = getSeverity();
 
   return (
-    <div className="bg-white dark:bg-[#111C24] rounded-2xl p-5 border border-[#D1EAE5] dark:border-slate-800 shadow-xs space-y-4">
+    <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-[#D1EAE5] dark:border-slate-700 shadow-xs space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/60 flex items-center justify-center text-[#0A5C5A] dark:text-teal-300 shrink-0">

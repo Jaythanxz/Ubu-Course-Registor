@@ -38,7 +38,7 @@ export default function ReviewsPage() {
       </div>
 
       {/* Review Comments Container */}
-      <div className="bg-white dark:bg-[#0c1d22] rounded-3xl p-6 sm:p-8 border border-[#D1EAE5] dark:border-teal-900/40 shadow-xs transition-colors">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-[#D1EAE5] dark:border-slate-700 shadow-xs transition-colors">
         <ReviewCommentList reviews={reviews} />
       </div>
     </div>

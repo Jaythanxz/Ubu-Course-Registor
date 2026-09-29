@@ -15,12 +15,14 @@
   }
 
   html.dark {
-    --primary: #00897B;
-    --primary-dark: #004D40;
-    --bg-page: #080F15;
-    --card-bg: #111C24;
-    --text-primary: #f1f5f9;
-    --border-color: #1E3545;
+    --primary: #14B8A6;
+    --primary-dark: #0D9488;
+    --primary-light: #2DD4BF;
+    --accent: #F59E0B;
+    --bg-page: #0F172A;
+    --card-bg: #1E293B;
+    --text-primary: #F8FAFC;
+    --border-color: #334155;
     color-scheme: dark;
   }
 

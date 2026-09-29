@@ -123,7 +123,7 @@ export default function AssessmentPage() {
 
       {!isCompleted ? (
         /* Quiz Interface */
-        <div className="bg-white dark:bg-[#0c1d22] rounded-3xl p-6 sm:p-10 border border-[#D1EAE5] dark:border-teal-900/40 shadow-sm space-y-8 transition-colors">
+        <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border border-[#D1EAE5] dark:border-slate-700 shadow-sm space-y-8 transition-colors">
           {/* Progress Bar & Step Indicator */}
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs font-bold">
@@ -173,7 +173,7 @@ export default function AssessmentPage() {
         </div>
       ) : (
         /* Results View */
-        <div className="bg-white dark:bg-[#0c1d22] rounded-3xl p-6 sm:p-10 border border-[#D1EAE5] dark:border-teal-900/40 shadow-sm space-y-8 animate-in fade-in zoom-in-95 duration-300 transition-colors">
+        <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-10 border border-[#D1EAE5] dark:border-slate-700 shadow-sm space-y-8 animate-in fade-in zoom-in-95 duration-300 transition-colors">
           <div className="text-center space-y-3">
             <div className="w-16 h-16 rounded-3xl bg-[#E6F4F1] dark:bg-teal-950/60 text-[#0A5C5A] dark:text-teal-300 flex items-center justify-center mx-auto shadow-sm">
               <Award className="w-9 h-9 text-[#F07C00]" />

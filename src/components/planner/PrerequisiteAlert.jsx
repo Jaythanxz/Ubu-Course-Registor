@@ -7,7 +7,7 @@ export default function PrerequisiteAlert({ isOpen, onClose, missingCourses, cou
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white dark:bg-[#111C24] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-red-200 dark:border-red-900/60 transform transition-all scale-100 space-y-4">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-red-200 dark:border-red-900/60 transform transition-all scale-100 space-y-4">
         <div className="flex items-start justify-between">
           <div className="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center">
             <ShieldAlert className="w-7 h-7" />

@@ -28,7 +28,7 @@ export default function Sidebar({ isMobileOpen = false, onClose = () => {} }) {
     { to: '/assessment', label: 'แบบสอบถามความสนใจ', icon: Sparkles, badge: 'AI' },
     { to: '/recommendation', label: 'แนะนำจัดตาราง', icon: Compass },
     { to: '/timetable', label: 'ตารางเรียน', icon: Calendar },
-    { to: '/gpa-simulator', label: 'ผลการเรียน', icon: FileText },
+    { to: '/gpa-simulator', label: 'ผลการเรียน & คำนวณเกรด', icon: FileText },
     { to: '/reviews', label: 'รีวิวรายวิชา', icon: MessageSquareQuote },
     { to: '/profile', label: 'ข้อมูลส่วนตัว', icon: User },
   ];
@@ -46,12 +46,12 @@ export default function Sidebar({ isMobileOpen = false, onClose = () => {} }) {
 
       {/* Mobile Slide-in Drawer */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-[#005A56] dark:bg-[#061716] text-white flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-in-out lg:hidden select-none ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-[#005A56] dark:bg-[#072421] text-white flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-in-out lg:hidden select-none ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Drawer Header */}
-        <div className="p-4 sm:p-5 border-b border-[#086864]/60 dark:border-[#0c2e2b] flex items-center justify-between">
+        <div className="p-4 sm:p-5 border-b border-[#086864]/60 dark:border-teal-900/60 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-2xl bg-amber-400 text-teal-950 flex items-center justify-center font-black text-sm shadow-md">
               UBU
@@ -120,7 +120,7 @@ export default function Sidebar({ isMobileOpen = false, onClose = () => {} }) {
       </aside>
 
       {/* Desktop Permanent Sidebar */}
-      <aside className="hidden lg:flex w-64 bg-[#005A56] dark:bg-[#061716] text-white flex-col justify-between h-screen sticky top-0 shrink-0 shadow-xl border-r border-[#004744] dark:border-[#0c2e2b] z-40 transition-all select-none">
+      <aside className="hidden lg:flex w-64 bg-[#005A56] dark:bg-[#072421] text-white flex-col justify-between h-screen sticky top-0 shrink-0 shadow-xl border-r border-[#004744] dark:border-teal-900/60 z-40 transition-all select-none">
         {/* Top Nav Area */}
         <div className="pt-6 flex-1 overflow-y-auto">
           <nav className="space-y-1">

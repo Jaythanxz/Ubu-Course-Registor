@@ -115,7 +115,7 @@ export default function RegistrationStepPage() {
       </div>
 
       {/* Step Indicator Progress Bar */}
-      <div className="bg-white dark:bg-[#0c1d22] rounded-2xl p-3 sm:p-5 border border-[#D1EAE5] dark:border-teal-900/40 shadow-xs transition-colors">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-3 sm:p-5 border border-[#D1EAE5] dark:border-slate-700 shadow-xs transition-colors">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
           {steps.map((s) => {
             const isActive = currentStep === s.num;
@@ -167,7 +167,7 @@ export default function RegistrationStepPage() {
       </div>
 
       {/* Step Content */}
-      <div className="bg-white dark:bg-[#0c1d22] rounded-3xl p-6 sm:p-8 border border-[#D1EAE5] dark:border-teal-900/40 shadow-xs transition-colors">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-[#D1EAE5] dark:border-slate-700 shadow-xs transition-colors">
         {/* STEP 1: Student Information Verification */}
         {currentStep === 1 && (
           <div className="space-y-6">

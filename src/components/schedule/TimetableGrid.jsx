@@ -30,7 +30,7 @@ export default function TimetableGrid() {
   };
 
   return (
-    <div className="bg-white dark:bg-[#111C24] rounded-2xl border border-[#D1EAE5] dark:border-slate-800 shadow-xs overflow-hidden">
+    <div className="bg-white dark:bg-slate-800 rounded-2xl border border-[#D1EAE5] dark:border-slate-700 shadow-xs overflow-hidden">
       {/* Table Header Bar */}
       <div className="p-3.5 sm:p-4 bg-gradient-to-r from-[#0A5C5A] to-[#064E4D] dark:from-[#0b3b38] dark:to-[#062422] text-white flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
@@ -114,7 +114,7 @@ export default function TimetableGrid() {
                         className={`rounded-xl border border-dashed transition-colors ${
                           isLunch
                             ? 'bg-amber-50/50 dark:bg-amber-950/20 border-amber-200/80 dark:border-amber-900/40 flex items-center justify-center'
-                            : 'bg-white/60 dark:bg-[#0C151D]/60 border-slate-200/70 dark:border-slate-800 hover:bg-slate-50/70 dark:hover:bg-slate-800/40'
+                            : 'bg-white/60 dark:bg-slate-900/40 border-slate-200/70 dark:border-slate-700/80 hover:bg-slate-50/70 dark:hover:bg-slate-800/40'
                         }`}
                       >
                         {isLunch && (

@@ -119,7 +119,7 @@ export default function TimetablePage() {
       <TimetableGrid />
 
       {/* Course Selection & Planner Drawer */}
-      <div className="bg-white dark:bg-[#111C24] rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-800 shadow-xs space-y-6">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-[#D1EAE5] dark:border-slate-700 shadow-xs space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
           <div>
             <div className="flex items-center gap-2">
@@ -178,7 +178,7 @@ export default function TimetablePage() {
             return (
               <div
                 key={course.course_id}
-                className="p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 hover:border-[#0A5C5A]/50 dark:hover:border-teal-500/50 bg-white dark:bg-[#0C151D] transition-all shadow-2xs space-y-3 flex flex-col justify-between"
+                className="p-5 rounded-2xl border border-slate-200/90 dark:border-slate-700 hover:border-[#0A5C5A]/50 dark:hover:border-teal-500/50 bg-white dark:bg-slate-900/60 transition-all shadow-2xs space-y-3 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start justify-between gap-2">

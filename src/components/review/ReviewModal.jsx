@@ -37,7 +37,7 @@ export default function ReviewModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white dark:bg-[#0c1d22] rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-[#D1EAE5] dark:border-teal-900/60 space-y-4 transition-colors max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-[#D1EAE5] dark:border-slate-700 space-y-4 transition-colors max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
           <h3 className="text-base font-bold text-slate-800 dark:text-white">
             เขียนรีวิวแบ่งปันประสบการณ์วิชาเรียน

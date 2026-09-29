@@ -15,9 +15,10 @@ import {
   Moon,
   Sparkles,
   Trash2,
+  Menu,
 } from 'lucide-react';
 
-export default function Header() {
+export default function Header({ onToggleMobileMenu = () => {} }) {
   const { currentUser, updateAvatar, logout, totalCredits, isWorkloadHigh, isDarkMode, toggleTheme } = useApp();
   const navigate = useNavigate();
 
@@ -43,24 +44,38 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white/95 dark:bg-[#0C151D]/95 border-b border-[#D1EAE5]/80 dark:border-slate-800/80 px-6 sm:px-8 py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-2xs backdrop-blur-md transition-colors">
-      {/* Left side: Context Badges */}
-      <div className="flex items-center gap-3">
-        <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F4F1] dark:bg-teal-950/50 border border-[#D1EAE5] dark:border-teal-800/60 text-[#005A56] dark:text-teal-300 text-xs font-semibold">
-          <Calendar className="w-3.5 h-3.5 text-[#005A56] dark:text-teal-400" />
-          <span>ภาคเรียนที่ {currentUser.semester}/{currentUser.academic_year}</span>
+    <header className="bg-white/95 dark:bg-[#0C151D]/95 border-b border-[#D1EAE5]/80 dark:border-slate-800/80 px-3.5 sm:px-8 py-2.5 sm:py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-2xs backdrop-blur-md transition-colors">
+      {/* Left side: Hamburger button (mobile) & Context Badges */}
+      <div className="flex items-center gap-2 sm:gap-3">
+        {/* Mobile Hamburger Menu Toggle Button */}
+        <button
+          onClick={onToggleMobileMenu}
+          className="lg:hidden flex items-center justify-center w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-[#005A56] dark:text-teal-300 shadow-2xs hover:bg-[#E6F4F1] dark:hover:bg-slate-700 cursor-pointer transition-colors"
+          title="เปิดเมนูหลัก"
+          aria-label="เปิดเมนูหลัก"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+
+        {/* Current Semester Badge */}
+        <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#E6F4F1] dark:bg-teal-950/50 border border-[#D1EAE5] dark:border-teal-800/60 text-[#005A56] dark:text-teal-300 text-[11px] sm:text-xs font-semibold">
+          <Calendar className="w-3.5 h-3.5 text-[#005A56] dark:text-teal-400 shrink-0" />
+          <span>
+            <span className="hidden xs:inline">ภาคเรียนที่ </span>
+            {currentUser.semester}/{currentUser.academic_year}
+          </span>
         </div>
 
         {isWorkloadHigh && (
           <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-xs font-semibold animate-pulse">
             <AlertTriangle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-            <span>ภาระงานสูงเกิน 3 วิชา</span>
+            <span>ภาระงานสูง</span>
           </div>
         )}
       </div>
 
       {/* Right side: Theme Toggle & Professional Profile Header Widget */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* Site-wide Theme Toggle Button */}
         <button
           onClick={toggleTheme}
@@ -121,7 +136,7 @@ export default function Header() {
 
           {/* Professional Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-[#111C24] rounded-3xl shadow-2xl border border-[#D1EAE5] dark:border-slate-800 p-4 space-y-4 animate-in fade-in zoom-in-95 duration-150 z-50">
+            <div className="absolute right-0 mt-2 w-72 max-w-[calc(100vw-1.5rem)] bg-white dark:bg-[#111C24] rounded-3xl shadow-2xl border border-[#D1EAE5] dark:border-slate-800 p-4 space-y-4 animate-in fade-in zoom-in-95 duration-150 z-50">
               {/* Header info in dropdown */}
               <div className="flex items-center gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div className="relative">

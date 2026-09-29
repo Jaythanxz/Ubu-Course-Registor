@@ -39,9 +39,9 @@ export default function WorkloadMeter() {
 
   return (
     <div className="bg-white dark:bg-[#111C24] rounded-2xl p-5 border border-[#D1EAE5] dark:border-slate-800 shadow-xs space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/60 flex items-center justify-center text-[#0A5C5A] dark:text-teal-300">
+          <div className="w-8 h-8 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/60 flex items-center justify-center text-[#0A5C5A] dark:text-teal-300 shrink-0">
             <Flame className="w-5 h-5 text-[#F07C00]" />
           </div>
           <div>
@@ -49,7 +49,7 @@ export default function WorkloadMeter() {
             <p className="text-xs text-slate-500 dark:text-slate-400">วิเคราะห์ความยากและภาระงานรวมเพื่อป้องกัน Burnout</p>
           </div>
         </div>
-        <span className={`text-xs px-2.5 py-1 rounded-full font-semibold border ${severity.badgeClass}`}>
+        <span className={`self-start sm:self-auto text-xs px-2.5 py-1 rounded-full font-semibold border ${severity.badgeClass}`}>
           {severity.label}
         </span>
       </div>

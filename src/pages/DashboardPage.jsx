@@ -136,12 +136,12 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* Sub-Header Pill Buttons matching Image 1 */}
-      <div className="flex items-center justify-between gap-4">
+      {/* Sub-Header Pill Buttons */}
+      <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-4">
         {/* Left Pill: ประวัติการลงทะเบียน */}
         <button
           onClick={() => setShowHistoryModal(true)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-[#009688] dark:border-teal-500 bg-white dark:bg-[#111C24] hover:bg-[#E6F4F1] dark:hover:bg-[#172530] text-[#005B58] dark:text-teal-300 text-sm font-bold shadow-2xs transition-all cursor-pointer group"
+          className="flex items-center gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full border-2 border-[#009688] dark:border-teal-500 bg-white dark:bg-[#111C24] hover:bg-[#E6F4F1] dark:hover:bg-[#172530] text-[#005B58] dark:text-teal-300 text-xs sm:text-sm font-bold shadow-2xs transition-all cursor-pointer group"
         >
           <div className="w-5 h-5 rounded-full bg-[#005B58] dark:bg-teal-600 text-white flex items-center justify-center">
             <RotateCcw className="w-3.5 h-3.5" />
@@ -150,7 +150,7 @@ export default function DashboardPage() {
         </button>
 
         {/* Right Pill: ปีการศึกษา 2569/1 */}
-        <div className="flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-[#009688] dark:border-teal-500 bg-white dark:bg-[#111C24] text-[#005B58] dark:text-teal-300 text-sm font-bold shadow-2xs">
+        <div className="flex items-center gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full border-2 border-[#009688] dark:border-teal-500 bg-white dark:bg-[#111C24] text-[#005B58] dark:text-teal-300 text-xs sm:text-sm font-bold shadow-2xs">
           <span>ปีการศึกษา 2569/1</span>
           <div className="flex flex-col text-[#F07C00] font-bold text-xs leading-none">
             <span>▲</span>
@@ -160,22 +160,22 @@ export default function DashboardPage() {
       </div>
 
       {/* แบบสอบถามความสนใจ (AI Interest & Learning Style Assessment Banner) */}
-      <div className="bg-gradient-to-r from-[#005A56] via-[#006e69] to-[#013f3d] dark:from-[#092e2b] dark:to-[#041716] rounded-3xl p-5 sm:p-6 text-white shadow-md border border-teal-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-xs flex items-center justify-center text-amber-300 shrink-0 shadow-inner">
-            <Sparkles className="w-6 h-6 text-amber-400" />
+      <div className="bg-gradient-to-r from-[#005A56] via-[#006e69] to-[#013f3d] dark:from-[#092e2b] dark:to-[#041716] rounded-3xl p-4 sm:p-6 text-white shadow-md border border-teal-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all">
+        <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/15 backdrop-blur-xs flex items-center justify-center text-amber-300 shrink-0 shadow-inner">
+            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-teal-200 uppercase tracking-wider">AI Course Advisor</span>
+              <span className="text-[11px] sm:text-xs font-bold text-teal-200 uppercase tracking-wider">AI Course Advisor</span>
               <span className="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[10px] font-bold border border-amber-400/30">
                 {assessmentData?.completed ? 'ประเมินแล้ว' : 'แบบสอบถามแนะนำ'}
               </span>
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-white mt-0.5">
+            <h3 className="text-sm sm:text-lg font-bold text-white mt-0.5">
               แบบสอบถามความสนใจและสไตล์การเรียนรู้ (5 ข้อสั้นๆ)
             </h3>
-            <p className="text-xs text-teal-100/85 mt-0.5 max-w-xl">
+            <p className="text-[11px] sm:text-xs text-teal-100/85 mt-0.5 max-w-xl">
               ค้นหาจุดเด่น ทักษะเฉพาะตัว และสายอาชีพที่เหมาะกับคุณ เพื่อจับคู่วิชาเลือกและ Roadmap ที่ตรงใจ
             </p>
           </div>
@@ -183,28 +183,27 @@ export default function DashboardPage() {
 
         <Link
           to="/assessment"
-          className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F07C00] hover:bg-[#d96e00] text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#F07C00]/30 transition-all hover:scale-[1.02] cursor-pointer"
+          className="self-stretch sm:self-auto flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-[#F07C00] hover:bg-[#d96e00] text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#F07C00]/30 transition-all hover:scale-[1.02] cursor-pointer"
         >
           <span>{assessmentData?.completed ? 'ทำแบบสอบถามใหม่' : 'เริ่มทำแบบสอบถาม'}</span>
           <ChevronRight className="w-4 h-4" />
         </Link>
       </div>
 
-      {/* 4 Big Feature Cards matching Image 1 */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+      {/* 4 Big Feature Cards */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5">
         {/* Card 1: แนะนำการจัดตาราง -> /recommendation */}
         <Link
           to="/recommendation"
-          className="bg-white dark:bg-[#111C24] rounded-3xl p-6 sm:p-7 border border-[#D1EAE5] dark:border-slate-800 shadow-xs hover:shadow-lg hover:border-[#009688] dark:hover:border-teal-400 transition-all flex flex-col items-center justify-between text-center min-h-[200px] sm:min-h-[220px] group cursor-pointer"
+          className="bg-white dark:bg-[#111C24] rounded-3xl p-4 sm:p-7 border border-[#D1EAE5] dark:border-slate-800 shadow-xs hover:shadow-lg hover:border-[#009688] dark:hover:border-teal-400 transition-all flex flex-col items-center justify-between text-center min-h-[160px] sm:min-h-[220px] group cursor-pointer"
         >
-          <div className="text-base sm:text-lg font-bold text-[#003835] dark:text-teal-100 leading-snug">
+          <div className="text-sm sm:text-lg font-bold text-[#003835] dark:text-teal-100 leading-snug">
             แนะนำ<br />การจัดตาราง
           </div>
           <div className="my-auto py-2">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-[#005A56] dark:text-teal-400 group-hover:scale-110 transition-transform">
-              {/* Headset Icon matching Image 1 */}
+            <div className="w-12 h-12 sm:w-18 sm:h-18 rounded-full flex items-center justify-center text-[#005A56] dark:text-teal-400 group-hover:scale-110 transition-transform">
               <svg
-                className="w-14 h-14 sm:w-16 sm:h-16 text-[#005A56] dark:text-teal-400"
+                className="w-10 h-10 sm:w-16 sm:h-16 text-[#005A56] dark:text-teal-400"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -223,14 +222,14 @@ export default function DashboardPage() {
         {/* Card 2: ค้นหารายวิชา -> /registration */}
         <Link
           to="/registration"
-          className="bg-white dark:bg-[#111C24] rounded-3xl p-6 sm:p-7 border border-[#D1EAE5] dark:border-slate-800 shadow-xs hover:shadow-lg hover:border-[#009688] dark:hover:border-teal-400 transition-all flex flex-col items-center justify-between text-center min-h-[200px] sm:min-h-[220px] group cursor-pointer"
+          className="bg-white dark:bg-[#111C24] rounded-3xl p-4 sm:p-7 border border-[#D1EAE5] dark:border-slate-800 shadow-xs hover:shadow-lg hover:border-[#009688] dark:hover:border-teal-400 transition-all flex flex-col items-center justify-between text-center min-h-[160px] sm:min-h-[220px] group cursor-pointer"
         >
-          <div className="text-base sm:text-lg font-bold text-[#003835] dark:text-teal-100 leading-snug">
+          <div className="text-sm sm:text-lg font-bold text-[#003835] dark:text-teal-100 leading-snug">
             ค้นหารายวิชา
           </div>
           <div className="my-auto py-2">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#005A56] dark:bg-teal-700 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-              <Search className="w-7 h-7 sm:w-8 sm:h-8 stroke-[3]" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#005A56] dark:bg-teal-700 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+              <Search className="w-6 h-6 sm:w-8 sm:h-8 stroke-[3]" />
             </div>
           </div>
         </Link>
@@ -238,14 +237,14 @@ export default function DashboardPage() {
         {/* Card 3: จัดตารางเรียน -> /timetable */}
         <Link
           to="/timetable"
-          className="bg-white dark:bg-[#111C24] rounded-3xl p-6 sm:p-7 border border-[#D1EAE5] dark:border-slate-800 shadow-xs hover:shadow-lg hover:border-[#009688] dark:hover:border-teal-400 transition-all flex flex-col items-center justify-between text-center min-h-[200px] sm:min-h-[220px] group cursor-pointer"
+          className="bg-white dark:bg-[#111C24] rounded-3xl p-4 sm:p-7 border border-[#D1EAE5] dark:border-slate-800 shadow-xs hover:shadow-lg hover:border-[#009688] dark:hover:border-teal-400 transition-all flex flex-col items-center justify-between text-center min-h-[160px] sm:min-h-[220px] group cursor-pointer"
         >
-          <div className="text-base sm:text-lg font-bold text-[#003835] dark:text-teal-100 leading-snug">
+          <div className="text-sm sm:text-lg font-bold text-[#003835] dark:text-teal-100 leading-snug">
             จัดตารางเรียน
           </div>
           <div className="my-auto py-2">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#005A56] dark:bg-teal-700 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-              <Calendar className="w-7 h-7 sm:w-8 sm:h-8 stroke-[2.5]" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#005A56] dark:bg-teal-700 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+              <Calendar className="w-6 h-6 sm:w-8 sm:h-8 stroke-[2.5]" />
             </div>
           </div>
         </Link>
@@ -253,14 +252,14 @@ export default function DashboardPage() {
         {/* Card 4: ผลการลงทะเบียน -> /registration step 4 */}
         <Link
           to="/registration"
-          className="bg-white dark:bg-[#111C24] rounded-3xl p-6 sm:p-7 border border-[#D1EAE5] dark:border-slate-800 shadow-xs hover:shadow-lg hover:border-[#009688] dark:hover:border-teal-400 transition-all flex flex-col items-center justify-between text-center min-h-[200px] sm:min-h-[220px] group cursor-pointer"
+          className="bg-white dark:bg-[#111C24] rounded-3xl p-4 sm:p-7 border border-[#D1EAE5] dark:border-slate-800 shadow-xs hover:shadow-lg hover:border-[#009688] dark:hover:border-teal-400 transition-all flex flex-col items-center justify-between text-center min-h-[160px] sm:min-h-[220px] group cursor-pointer"
         >
-          <div className="text-base sm:text-lg font-bold text-[#003835] dark:text-teal-100 leading-snug">
+          <div className="text-sm sm:text-lg font-bold text-[#003835] dark:text-teal-100 leading-snug">
             ผลการลงทะเบียน
           </div>
           <div className="my-auto py-2">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#005A56] dark:bg-teal-700 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-              <ClipboardList className="w-7 h-7 sm:w-8 sm:h-8 stroke-[2.5]" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#005A56] dark:bg-teal-700 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+              <ClipboardList className="w-6 h-6 sm:w-8 sm:h-8 stroke-[2.5]" />
             </div>
           </div>
         </Link>

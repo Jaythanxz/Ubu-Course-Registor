@@ -92,13 +92,13 @@ export default function RegistrationStepPage() {
       />
 
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-[#006663] to-[#013f3d] rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-gradient-to-r from-[#006663] to-[#013f3d] rounded-3xl p-4 sm:p-6 md:p-8 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-teal-100 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-teal-100 text-[11px] sm:text-xs font-semibold mb-2">
             <ClipboardCheck className="w-3.5 h-3.5 text-[#F07C00]" />
             <span>ระบบลงทะเบียนเรียนอย่างเป็นทางการ มหาวิทยาลัยอุบลราชธานี</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-black">
             ขั้นตอนการลงทะเบียนเรียน (Course Registration)
           </h1>
           <p className="text-xs sm:text-sm text-teal-100/90 mt-1">
@@ -106,17 +106,17 @@ export default function RegistrationStepPage() {
           </p>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/20 text-right">
-          <div className="text-[11px] text-teal-100 font-medium">หน่วยกิตที่เลือก</div>
-          <div className="text-2xl font-black text-white">
+        <div className="bg-white/10 backdrop-blur-md px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl border border-white/20 text-left sm:text-right shrink-0">
+          <div className="text-[10px] sm:text-[11px] text-teal-100 font-medium">หน่วยกิตที่เลือก</div>
+          <div className="text-xl sm:text-2xl font-black text-white">
             {totalCredits} <span className="text-xs font-normal text-teal-200">/ 22</span>
           </div>
         </div>
       </div>
 
       {/* Step Indicator Progress Bar */}
-      <div className="bg-white dark:bg-[#0c1d22] rounded-2xl p-4 sm:p-5 border border-[#D1EAE5] dark:border-teal-900/40 shadow-xs transition-colors">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="bg-white dark:bg-[#0c1d22] rounded-2xl p-3 sm:p-5 border border-[#D1EAE5] dark:border-teal-900/40 shadow-xs transition-colors">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
           {steps.map((s) => {
             const isActive = currentStep === s.num;
             const isPassed = currentStep > s.num;
